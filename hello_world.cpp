@@ -1,8 +1,9 @@
 #include "ceres/ceres.h"
 #include "glog/logging.h"
-#define AUTODIFF 0
+#include "math.h"
+#define AUTODIFF 1
 #define NUMEDIFF 0
-#define ANALDIFF 1
+#define ANALDIFF 0
 
 using namespace std;
 
@@ -10,7 +11,7 @@ using namespace std;
 struct CostFunctor {
   template <typename T>
   bool operator()(const T* const x, T* residual) const {
-    residual[0] = 10.0 - x[0];
+    residual[0] = cos(x[0]) - 2.0 * x[0] + 6.0;
     return true;
   }
 };
@@ -44,7 +45,8 @@ class QuadraticCostFunction : public ceres::SizedCostFunction<1, 1> {
 int main(int argc, char** argv) {
   google::InitGoogleLogging(argv[0]);
 
-  double x = double(int(*argv[1] - '0'));
+  double x = 0.5;
+  if (argv[1]) x = double(int(*argv[1] - '0'));
   const double initial_x = x;
 
   ceres::Problem problem;

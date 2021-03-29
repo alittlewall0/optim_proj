@@ -9,3 +9,7 @@ include_directories(${CERES_INCLUDE_DIRS})
 
 add_executable(hello_world hello_world.cpp)
 target_link_libraries(hello_world ${CERES_LIBRARIES})
+
+
+add_executable(powell powell.cpp)
+target_link_libraries(powell ${CERES_LIBRARIES} gflags)
