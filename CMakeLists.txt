@@ -13,3 +13,6 @@ target_link_libraries(hello_world ${CERES_LIBRARIES})
 
 add_executable(powell powell.cpp)
 target_link_libraries(powell ${CERES_LIBRARIES} gflags)
+
+add_executable(curve_fitting curve_fitting.cpp)
+target_link_libraries(curve_fitting ${CERES_LIBRARIES} gflags)
