@@ -16,3 +16,17 @@ target_link_libraries(powell ${CERES_LIBRARIES} gflags)
 
 add_executable(curve_fitting curve_fitting.cpp)
 target_link_libraries(curve_fitting ${CERES_LIBRARIES} gflags)
+
+
+list(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake_modules)
+
+find_package(G2O REQUIRED)
+include_directories(${G2O_INCLUDE_DIRS} "/usr/include/eigen3")
+
+find_package(OpenCV REQUIRED)
+include_directories(${OpenCV_DIRS})
+
+add_executable(g2o_curve_fit g2o_curve_fit.cpp)
+target_link_libraries(g2o_curve_fit
+                    ${OpenCV_LIBS}
+                    g2o_core g2o_stuff)
